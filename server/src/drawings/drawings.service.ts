@@ -59,12 +59,16 @@ export class DrawingsService {
       fs.mkdirSync(dirUser, { recursive: true });
     }
 
-    const url = `${process.env.API_URL}/public/${user.login}/${hashedDrawingName}.jpg`;
+    const file = `${hashedDrawingName}.jpg`;
 
+    const url = `${process.env.API_URL}/public/${user.login}/${file}`;
+    // TODO нужно ли делать сохранение файла асинхронным и обрабатывать ошибку?
     fs.writeFileSync(`${dirUser}/${hashedDrawingName}.jpg`, buffer);
+
     const newDrawing = await this.drawingRepository.create({
       ...drawing,
       url: url,
+      file: file,
       author: user,
     });
 
@@ -117,11 +121,26 @@ export class DrawingsService {
   }
   // TODO проверить метод удаления
   // * удалить рисунок
-  async deleteDrawing(id: number) {
+  async deleteDrawing(id: number, user: User) {
+    const deletedDrawing = await this.drawingRepository.findOne(id, {
+      relations: ['author'],
+    });
+
+    if (!deletedDrawing) {
+      throw new DrawingNotFoundException(id);
+    }
+
+    if (deletedDrawing.author.login !== user.login) {
+      throw new ForbiddenException('Forbidden');
+    }
+
     const deleteResponse = await this.drawingRepository.delete(id);
     if (!deleteResponse.affected) {
       throw new DrawingNotFoundException(id);
     }
+    // TODO нужно ли делать метод асинхронным и обрабатывать ошибку?
+    const file = deletedDrawing.file;
+    fs.unlinkSync(`./public/${user.login}/${file}`);
   }
 
   // * сохранить изменения в данных о рисунке
