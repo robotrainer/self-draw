@@ -6,6 +6,8 @@ import Drawing from './drawing.entity';
 import CreateDrawingDto from './dto/createDrawing.dto';
 import UpdateDrawingDto from './dto/updateDrawing.dto';
 import DrawingNotFoundException from './exceptions/drawingfNotFound.exception';
+import * as fs from 'fs';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class DrawingsService {
@@ -45,10 +47,27 @@ export class DrawingsService {
   // TODO убрать заглушку в drawing.entity c imgPath
   // * создать рисунок
   async createDrawing(drawing: CreateDrawingDto, user: User) {
+    const buffer = Buffer.from(drawing.imgBase64, 'base64');
+    const timestamp = Date.now().toString();
+    const hashedDrawingName = crypto
+      .createHash('md5')
+      .update(timestamp)
+      .digest('hex');
+    const dirUser = `./public/${user.login}`;
+
+    if (!fs.existsSync(dirUser)) {
+      fs.mkdirSync(dirUser, { recursive: true });
+    }
+
+    const url = `${process.env.API_URL}/public/${user.login}/${hashedDrawingName}.jpg`;
+
+    fs.writeFileSync(`${dirUser}/${hashedDrawingName}.jpg`, buffer);
     const newDrawing = await this.drawingRepository.create({
       ...drawing,
+      url: url,
       author: user,
     });
+
     await this.drawingRepository.save(newDrawing);
     return newDrawing;
   }
@@ -96,7 +115,7 @@ export class DrawingsService {
 
     return this.saveUpdateDrawing(id, updateDrawing);
   }
-
+  // TODO проверить метод удаления
   // * удалить рисунок
   async deleteDrawing(id: number) {
     const deleteResponse = await this.drawingRepository.delete(id);

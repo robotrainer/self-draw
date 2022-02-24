@@ -16,6 +16,7 @@ import { DrawingsService } from './drawings.service';
 import CreateDrawingDto from './dto/createDrawing.dto';
 import UpdateDrawingDto from './dto/updateDrawing.dto';
 
+// TODO добавить роутер удаления рисунков
 @Controller('drawings')
 @UseGuards(JwtAuthenticationGuard)
 @UseInterceptors(ClassSerializerInterceptor)

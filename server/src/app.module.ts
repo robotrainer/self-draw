@@ -5,6 +5,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { DrawingsModule } from './drawings/drawings.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -19,6 +21,11 @@ import { DrawingsModule } from './drawings/drawings.module';
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION_TIME: Joi.string().required(),
       }),
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/public',
+      renderPath: '/*',
     }),
     DatabaseModule,
     UsersModule,

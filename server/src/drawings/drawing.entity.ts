@@ -17,7 +17,7 @@ class Drawing {
   public title: string;
   // TODO убрать заглушку
   @Column({ nullable: true })
-  public imgPath: string;
+  public url: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   public createDate: Date;
