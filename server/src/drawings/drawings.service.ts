@@ -75,9 +75,7 @@ export class DrawingsService {
       updateDrawing.likes--;
     }
 
-    await this.drawingRepository.save(updateDrawing);
-
-    return await this.drawingRepository.findOne(id, { relations: ['author'] });
+    return this.saveUpdateDrawing(id, updateDrawing);
   }
 
   // * опубликовать или отменить публикацию
