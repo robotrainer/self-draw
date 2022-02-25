@@ -9,6 +9,7 @@ import DrawingNotFoundException from './exceptions/drawingfNotFound.exception';
 import * as fs from 'fs';
 import * as crypto from 'crypto';
 
+// TODO сделать метод получения рисунков конкретного пользователя
 @Injectable()
 export class DrawingsService {
   constructor(
@@ -43,8 +44,7 @@ export class DrawingsService {
       },
     });
   }
-  // TODO при получении base64 конвертировать в png и сохранять или в файловую систему, или в облачное хранилище minIO
-  // TODO убрать заглушку в drawing.entity c imgPath
+
   // * создать рисунок
   async createDrawing(drawing: CreateDrawingDto, user: User) {
     const buffer = Buffer.from(drawing.imgBase64, 'base64');
@@ -119,7 +119,7 @@ export class DrawingsService {
 
     return this.saveUpdateDrawing(id, updateDrawing);
   }
-  // TODO проверить метод удаления
+
   // * удалить рисунок
   async deleteDrawing(id: number, user: User) {
     const deletedDrawing = await this.drawingRepository.findOne(id, {
