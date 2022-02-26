@@ -1,23 +1,15 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Store from './store/store';
-
-interface State {
-  store: Store;
-}
-
-const store = new Store();
-
-export const Context = createContext<State>({
-  store,
-});
+import {Context, store} from './context/index';
 
 ReactDOM.render(
   <Context.Provider value={{
     store
   }}>
-    <App />
+    <div className='App'>
+      <App />
+    </div>
   </Context.Provider>,
   document.getElementById('root')
 );

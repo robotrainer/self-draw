@@ -1,13 +1,8 @@
 import { makeAutoObservable } from "mobx";
+import { IUser } from "../models/IUser";
 import AuthService from "../service/authService";
-
-interface User {
-  id: number;
-  login: string;
-}
-
 export default class Store {
-  user = {} as User;
+  user = {} as IUser;
   isAuth = false;
   isLoading = false;
 
@@ -19,7 +14,7 @@ export default class Store {
     this.isAuth = bool;
   }
 
-  setUser(user: User) {
+  setUser(user: IUser) {
     this.user = user;
   }
 
@@ -45,7 +40,7 @@ export default class Store {
     await AuthService.logout().then(() => {
       localStorage.removeItem('auth');
       this.setAuth(false);
-      this.setUser({} as User);
+      this.setUser({} as IUser);
     }).catch ((error) => console.log(error.response.data.message));
   }
 
