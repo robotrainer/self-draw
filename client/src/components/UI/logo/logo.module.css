@@ -1,0 +1,10 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  border-bottom: 1px solid #C4C4C4;
+  background: linear-gradient(90deg, rgba(221,42,123,1) 30%, rgba(129,52,175,1) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

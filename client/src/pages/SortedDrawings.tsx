@@ -9,13 +9,12 @@ import DrawingsService from '../service/drawingsService';
 import '../style/App.css';
 
 // TODO сделать декомпозицию
-// TODO сделать декомпозицию стилей
-const Drawings: FC = () => {
+const SortedDrawings: FC = () => {
   const {store} = useContext(Context);
   const [drawings, setDrawings] = useState<DrawingResponse[]>([]);
 
   const getDrawings = async () => {
-    await DrawingsService.getAllDrawings().then((res) => {
+    await DrawingsService.getSortedDrawings().then((res) => {
       setDrawings(res.data);
     }).catch((error) => console.log(error.response.data.message));
   }
@@ -31,10 +30,10 @@ const Drawings: FC = () => {
   return (
     <div>
       <Logo title='SelfDraw'/>
-      <DrawingList drawings={drawings}/>
+      <DrawingList drawings={drawings} />
       <TabBar />
     </div>
   );
 }
 
-export default observer(Drawings);
+export default observer(SortedDrawings);

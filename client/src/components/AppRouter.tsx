@@ -5,6 +5,7 @@ import { Context } from '../context'
 import Drawings from '../pages/Drawings';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import SortedDrawings from '../pages/SortedDrawings';
 
 const AppRouter: FC = () => {
   const {store} = useContext(Context);
@@ -14,6 +15,7 @@ const AppRouter: FC = () => {
     ?
     <Routes>
       <Route path='drawings' element={<Drawings />} />
+      <Route path='sorted' element={<SortedDrawings />}/>
       <Route path='*' element={<Drawings />} />
     </Routes>
     :

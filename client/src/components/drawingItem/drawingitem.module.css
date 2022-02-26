@@ -1,0 +1,19 @@
+.drawingItem {
+}
+
+.date {
+  color: #C4C4C4;
+}
+
+.caption {
+  height: 80px;
+  border: 1px solid #C4C4C4;
+  background: rgb(254,218,119);
+  background: linear-gradient(180deg, rgba(254,218,119,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.captionInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}

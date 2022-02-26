@@ -6,4 +6,8 @@ export default class DrawingsService {
   static getAllDrawings(): Promise<AxiosResponse<DrawingResponse[]>>{
     return axiosInstance.get<DrawingResponse[]>('/drawings');
   }
+
+  static getSortedDrawings(): Promise<AxiosResponse<DrawingResponse[]>>{
+    return axiosInstance.get<DrawingResponse[]>('/drawings/sorted');
+  }
 }
