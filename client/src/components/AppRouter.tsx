@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { FC, useContext } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import { Context } from '../context'
+import CreateDrawing from '../pages/CreateDrawing';
 import Drawings from '../pages/Drawings';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -16,6 +17,7 @@ const AppRouter: FC = () => {
     <Routes>
       <Route path='drawings' element={<Drawings />} />
       <Route path='sorted' element={<SortedDrawings />}/>
+      <Route path='create' element={<CreateDrawing />} />
       <Route path='*' element={<Drawings />} />
     </Routes>
     :

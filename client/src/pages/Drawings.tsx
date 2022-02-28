@@ -30,9 +30,7 @@ const Drawings: FC = () => {
 
   return (
     <div>
-      <Logo title='SelfDraw'/>
       <DrawingList drawings={drawings}/>
-      <TabBar />
     </div>
   );
 }

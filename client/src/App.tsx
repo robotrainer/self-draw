@@ -2,6 +2,8 @@ import { observer } from 'mobx-react-lite';
 import { useContext, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
+import Logo from './components/UI/logo/Logo';
+import TabBar from './components/UI/tabbar/TabBar';
 import { Context } from './context';
 
 function App() {
@@ -15,7 +17,9 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Logo title='SelfDraw'/>
       <AppRouter />
+      <TabBar />
     </BrowserRouter>
   );
 }

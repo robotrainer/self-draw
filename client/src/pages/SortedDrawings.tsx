@@ -29,9 +29,7 @@ const SortedDrawings: FC = () => {
 
   return (
     <div>
-      <Logo title='SelfDraw'/>
       <DrawingList drawings={drawings} />
-      <TabBar />
     </div>
   );
 }

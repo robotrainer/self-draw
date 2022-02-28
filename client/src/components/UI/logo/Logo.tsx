@@ -5,7 +5,7 @@ interface LogoProps {
   title: string;
 }
 
-const Logo: FC<LogoProps> = ({title}: LogoProps) => {
+const Logo: FC<LogoProps> = ({title}) => {
   return (
     <h2 className={cl.logo}>{title}</h2>
   )

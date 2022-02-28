@@ -7,7 +7,7 @@ interface DrawingProps {
   drawing: DrawingResponse;
 }
 
-const DrawingItem: FC<DrawingProps> = ({drawing}: DrawingProps) => {
+const DrawingItem: FC<DrawingProps> = ({drawing}) => {
   return (
     <div className={cl.drawingItem}>
       <img src={drawing.url} alt=''/>

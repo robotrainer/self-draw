@@ -7,7 +7,7 @@ interface DrawingsProps {
   drawings: DrawingResponse[];
 }
 
-const DrawingList: FC<DrawingsProps> = ({drawings}: DrawingsProps) => {
+const DrawingList: FC<DrawingsProps> = ({drawings}) => {
   return (
     <div className={cl.drawingList}>
     {drawings.map((drawing) => 
