@@ -1,10 +1,10 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import CanvasDraw from 'react-canvas-draw';
 import ToolBar from '../components/UI/toolbar/ToolBar';
 
 const CreateDrawing: FC = () => {
   const [brushRadius, setBrushRadius] = useState<number>(10);
-  const [brushColor, setBrushColor] = useState<string>('#444');
+  const [brushColor, setBrushColor] = useState<string>('#444444');
   const [draw, setDraw] = useState<CanvasDraw | null>(null);
 
   const changeRadius = (radius: number) => {
@@ -26,7 +26,13 @@ const CreateDrawing: FC = () => {
         lazyRadius={0}
         brushRadius={brushRadius}
       />
-      <ToolBar changeRadius={changeRadius} changeColor={changeColor} draw={draw}/>
+      <ToolBar
+        changeRadius={changeRadius}
+        changeColor={changeColor}
+        draw={draw}
+        radius={brushRadius}
+        color={brushColor}
+      />
     </div>
   )
 }

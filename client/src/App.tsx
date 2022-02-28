@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Logo title='SelfDraw'/>
       <AppRouter />
-      <TabBar />
+      {store.isAuth && <TabBar />}
     </BrowserRouter>
   );
 }
