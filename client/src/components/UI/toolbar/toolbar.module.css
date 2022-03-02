@@ -1,5 +1,5 @@
 .container {
-  height: 250px;
+  height: 170px;
   border-top: 1px solid #C4C4C4;
 }
 
@@ -38,5 +38,5 @@
 
 .controlBtn {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }

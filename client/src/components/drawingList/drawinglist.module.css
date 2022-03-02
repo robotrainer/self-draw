@@ -1,4 +1,10 @@
 .drawingList {
-  height: 700px;
+  height: 560px;
   overflow: auto;
+}
+
+.drawingList__control {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
 }

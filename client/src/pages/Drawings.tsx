@@ -1,8 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import DrawingList from '../components/drawingList/DrawingList';
-import Logo from '../components/UI/logo/Logo';
-import TabBar from '../components/UI/tabbar/TabBar';
 import { Context } from '../context';
 import { DrawingResponse } from '../models/response/DrawingResponse';
 import DrawingsService from '../service/drawingsService';
@@ -15,9 +13,10 @@ const Drawings: FC = () => {
   const [drawings, setDrawings] = useState<DrawingResponse[]>([]);
 
   const getDrawings = async () => {
+    store.setLoading(true);
     await DrawingsService.getAllDrawings().then((res) => {
       setDrawings(res.data);
-    }).catch((error) => console.log(error.response.data.message));
+    }).catch((error) => console.log(error.response.data.message)).finally(()=> store.setLoading(false));
   }
 
   useEffect(() => {
@@ -30,7 +29,7 @@ const Drawings: FC = () => {
 
   return (
     <div>
-      <DrawingList drawings={drawings}/>
+      <DrawingList drawings={drawings} control={false}/>
     </div>
   );
 }

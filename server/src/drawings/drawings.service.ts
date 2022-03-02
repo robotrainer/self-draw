@@ -45,6 +45,18 @@ export class DrawingsService {
     });
   }
 
+  getDrawingsUser(user: User) {
+    return this.drawingRepository.find({
+      where: {
+        author: user,
+      },
+      relations: ['author'],
+      order: {
+        createDate: 'DESC',
+      },
+    });
+  }
+
   // * создать рисунок
   async createDrawing(drawing: CreateDrawingDto, user: User) {
     const buffer = Buffer.from(drawing.imgBase64, 'base64');
@@ -102,13 +114,13 @@ export class DrawingsService {
   }
 
   // * опубликовать или отменить публикацию
-  async publishDrawing(id: number, drawing: UpdateDrawingDto, user: User) {
-    const updateDrawing = await this.drawingRepository.findOne(id, {
+  async publishDrawing(drawing: UpdateDrawingDto, user: User) {
+    const updateDrawing = await this.drawingRepository.findOne(drawing.id, {
       relations: ['author'],
     });
 
     if (!updateDrawing) {
-      throw new DrawingNotFoundException(id);
+      throw new DrawingNotFoundException(drawing.id);
     }
 
     if ('publication' in drawing && updateDrawing.author.login === user.login) {
@@ -117,7 +129,7 @@ export class DrawingsService {
       throw new ForbiddenException('Forbidden');
     }
 
-    return this.saveUpdateDrawing(id, updateDrawing);
+    return this.saveUpdateDrawing(drawing.id, updateDrawing);
   }
 
   // * удалить рисунок

@@ -35,6 +35,11 @@ export class DrawingsController {
     return this.drawingsService.getSortedDrawings();
   }
 
+  @Get('user')
+  getDrawingsUser(@Req() req: RequestWithUser) {
+    return this.drawingsService.getDrawingsUser(req.user);
+  }
+
   @Post()
   async createDrawing(
     @Body() drawing: CreateDrawingDto,
@@ -43,13 +48,12 @@ export class DrawingsController {
     return this.drawingsService.createDrawing(drawing, req.user);
   }
 
-  @Patch(':id/publish')
+  @Patch('publish')
   async publishDrawing(
-    @Param() { id }: FindOneParams,
     @Body() drawing: UpdateDrawingDto,
     @Req() req: RequestWithUser,
   ) {
-    return this.drawingsService.publishDrawing(Number(id), drawing, req.user);
+    return this.drawingsService.publishDrawing(drawing, req.user);
   }
 
   @Patch(':id/like')

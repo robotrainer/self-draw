@@ -1,8 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import DrawingList from '../components/drawingList/DrawingList';
-import Logo from '../components/UI/logo/Logo';
-import TabBar from '../components/UI/tabbar/TabBar';
 import { Context } from '../context';
 import { DrawingResponse } from '../models/response/DrawingResponse';
 import DrawingsService from '../service/drawingsService';
@@ -29,7 +27,7 @@ const SortedDrawings: FC = () => {
 
   return (
     <div>
-      <DrawingList drawings={drawings} />
+      <DrawingList drawings={drawings} control={false}/>
     </div>
   );
 }

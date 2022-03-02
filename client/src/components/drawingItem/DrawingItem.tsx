@@ -9,7 +9,7 @@ interface DrawingProps {
 
 const DrawingItem: FC<DrawingProps> = ({drawing}) => {
   return (
-    <div className={cl.drawingItem}>
+    <div>
       <img src={drawing.url} alt=''/>
       <div className={cl.caption}>
         <div className={cl.captionInfo}>

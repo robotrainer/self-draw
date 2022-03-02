@@ -13,6 +13,7 @@ const TabBar: FC= () => {
     <button onClick={() => navigate('/drawing')}>New</button>
     <button onClick={() => navigate('/sorted')}>Popular</button>
     <button onClick={() => navigate('/create')}>Create</button>
+    <button onClick={() => navigate('/account')}>Account</button>
     <button onClick={() => store.logout()}>Log Out</button>
   </div>
   )

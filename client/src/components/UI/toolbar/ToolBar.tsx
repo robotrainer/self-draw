@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import cl from './toolbar.module.css';
 import CanvasDraw from 'react-canvas-draw';
+import { useNavigate } from 'react-router-dom';
 
 interface ToolBarProps {
   radius: number;
@@ -8,19 +9,25 @@ interface ToolBarProps {
   draw: CanvasDraw | null;
   changeRadius: (radius: number) => void;
   changeColor: (color: string) => void;
+  getTitle: (title: string) => void;
+  createDrawing: (url: string) => void;
 }
 
 const ToolBar: FC<ToolBarProps> = ({
   changeRadius,
   changeColor,
+  getTitle,
+  createDrawing,
   draw,
   radius,
   color}) => {
+
+    const navigate = useNavigate();
+
   return (
     <div className={cl.container}>
       <div className={cl.toolBar}>
         <div className={cl.tools}>
-          {/* <button>Color</button> */}
           <input
             onChange={(e) => changeColor(e.target.value)}
             type='color'
@@ -49,12 +56,21 @@ const ToolBar: FC<ToolBarProps> = ({
         </label>
         <label className={cl.title}>
           Title:
-          <input type='text' placeholder='text'/>
+          <input
+            type='text'
+            placeholder='text'
+            onChange={(e) => getTitle(e.target.value)}
+          />
         </label>
         <div className={cl.controlBtn}>
-          <button>Publish</button>
-          <button>Save</button>
-          <button>Cancel</button>
+          <button
+            onClick={() => {
+              draw?.getDataURL() && createDrawing(draw.getDataURL());
+              navigate('/account');
+            }}
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
@@ -62,3 +78,5 @@ const ToolBar: FC<ToolBarProps> = ({
 }
 
 export default ToolBar;
+
+//TODO после нажатия на save и publish перенаправлять на страницу account только в том случае, если запросы прошли успешно

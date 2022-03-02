@@ -6,5 +6,6 @@ export interface DrawingResponse {
   url: string;
   createDate: string;
   likes: number;
+  publication: boolean;
   author: IUser;
 }
